@@ -75,6 +75,13 @@
                    class="btn btn-outline-danger">
                         DELETE
                     </a>
+
+                    <a asp-controller="Empleados"
+                   asp-action="EditEmpleado"
+                   asp-route-id="@item.IdEmpleado"
+                   class="btn btn-outline-dark">
+                        EDIT
+                    </a>
                 
             </td>
         </tr>

@@ -6,15 +6,15 @@ namespace MvcCoreMultiplesBBDD.Controllers
 {
     public class EmpleadosController : Controller
     {
-        private RepositoryEmpleados repo;
+        private IRepositoryEmpleados repo;
 
-        public EmpleadosController(RepositoryEmpleados repo)
+        public EmpleadosController(IRepositoryEmpleados repo)
         {
             this.repo = repo;
         }
         public IActionResult Index()
         {
-            List<Empleado> empleados = this.repo.GetEmpelados();
+            List<Empleado> empleados = this.repo.GetEmpleados();
             return View(empleados);
         }
 
@@ -29,6 +29,21 @@ namespace MvcCoreMultiplesBBDD.Controllers
             await repo.DeleteEmpleado(id);
             return RedirectToAction("Index");
         }
+
+        public IActionResult EditEmpleado(int id)
+        {
+            Empleado empleado = repo.FindEmpleado(id);
+            return View(empleado);
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> EditEmpleado(Empleado empleado)
+        {
+            await repo.UpdateEmpleado(empleado.IdEmpleado
+                , empleado.Salario, empleado.Oficio);
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

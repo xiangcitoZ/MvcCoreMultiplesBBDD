@@ -5,14 +5,23 @@ using MvcCoreMultiplesBBDD.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString =
-    builder.Configuration.GetConnectionString("OracleHospital");
+    builder.Configuration.GetConnectionString("SqlHospital");
 
-builder.Services.AddTransient<RepositoryEmpleados>();
-
+builder.Services.AddTransient<IRepositoryEmpleados, RepositoryEmpleadosSql>();
 builder.Services.AddDbContext<EmpleadosContext>
-     (options => options.UseOracle(connectionString));
+     (options => options.UseSqlServer(connectionString));
 
-// Add services to the container.
+
+
+//string connectionString =
+//    builder.Configuration.GetConnectionString("OracleHospital");
+
+//builder.Services.AddTransient<IRepositoryEmpleados, RepositoryEmpleadosOracle>();
+
+//builder.Services.AddDbContext<EmpleadosContext>
+//     (options => options.UseOracle(connectionString));
+
+
 builder.Services.AddControllersWithViews();
 
 
