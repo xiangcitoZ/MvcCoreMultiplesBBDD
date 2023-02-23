@@ -1,7 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using MvcCoreMultiplesBBDD.Data;
+using MvcCoreMultiplesBBDD.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
+
+string connectionString =
+    builder.Configuration.GetConnectionString("OracleHospital");
+
+builder.Services.AddTransient<RepositoryEmpleados>();
+
+builder.Services.AddDbContext<EmpleadosContext>
+     (options => options.UseOracle(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+
 
 var app = builder.Build();
 
@@ -22,6 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Empleados}/{action=Index}/{id?}");
 
 app.Run();

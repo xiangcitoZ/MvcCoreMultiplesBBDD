@@ -61,8 +61,20 @@
                 @Html.DisplayFor(modelItem => item.IdDept)
             </td>
             <td>
-                
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+
+                    <a asp-controller="Empleados"
+                   asp-action="Details"
+                   asp-route-id="@item.IdEmpleado"
+                   class="btn btn-outline-info">
+                        DETAILS
+                    </a>
+
+                    <a asp-controller="Empleados"
+                   asp-action="Delete"
+                   asp-route-id="@item.IdEmpleado"
+                   class="btn btn-outline-danger">
+                        DELETE
+                    </a>
                 
             </td>
         </tr>

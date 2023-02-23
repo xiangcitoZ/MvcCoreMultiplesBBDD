@@ -17,5 +17,18 @@ namespace MvcCoreMultiplesBBDD.Controllers
             List<Empleado> empleados = this.repo.GetEmpelados();
             return View(empleados);
         }
+
+        public IActionResult Details(int id)
+        {
+            Empleado empleado = this.repo.FindEmpleado(id);
+            return View(empleado);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await repo.DeleteEmpleado(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }
